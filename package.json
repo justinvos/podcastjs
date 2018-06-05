@@ -1,0 +1,21 @@
+{
+  "name": "podcastjs",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node bin/index.js",
+    "test": "jest"
+  },
+  "author": "Justin Vos",
+  "license": "MIT",
+  "dependencies": {
+    "@types/node-fetch": "^2.1.1",
+    "node-fetch": "^2.1.2",
+    "xml-js": "^1.6.4"
+  },
+  "devDependencies": {
+    "jest": "^23.1.0"
+  }
+}
