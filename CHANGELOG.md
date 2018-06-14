@@ -3,7 +3,8 @@
 ### 0.1.3
 - Correct README formatting
 - Add brief documentation to README
-- Make the Episode.image property optional 
+- Make the Episode.image property optional
+- Add more details (description, repository, bugs and keywords) to the package.json
 
 ### 0.1.2
 - Release June 14, 2018
