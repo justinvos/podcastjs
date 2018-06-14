@@ -20,7 +20,13 @@ export function parsePodcastTitle (channel: any): string {
 }
 
 export function parsePodcastDate (channel: any): string {
-  return channel.lastBuildDate._text
+  if (channel.pubDate) {
+    return channel.pubDate._text
+  } else if (channel.lastBuildDate) {
+    return channel.lastBuildDate._text
+  } else {
+    throw new Error('Could not parse Podcast.date')
+  }
 }
 
 export function parsePodcastDescription (channel: any): string {
