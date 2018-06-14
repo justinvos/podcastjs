@@ -1,7 +1,7 @@
 {
   "name": "podcastjs",
   "version": "0.1.2",
-  "description": "",
+  "description": "podcast.js fetches and parses podcast RSS fields so you don't have to!",
   "main": "index.js",
   "scripts": {
     "build": "tsc",
