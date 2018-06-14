@@ -19,11 +19,11 @@ npm install podcastjs
 
 ### Plain JavaScript:
 ```js
-const fetchPodcast = require('podcastjs')
+const podcastJs = require('podcastjs')
 
 const serialRssUrl = 'http://feeds.serialpodcast.org/serialpodcast'
 
-fetchPodcast(serialRssUrl).then((podcast) => {
+podcastJs.fetchPodcast(serialRssUrl).then((podcast) => {
   console.log(podcast.title)
 })
 ```
