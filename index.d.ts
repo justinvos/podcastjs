@@ -15,8 +15,9 @@ interface Episode {
   title: string
   date: string
   description: string
-  image: string
   audio: string
+
+  image?: string
 }
 
 interface ParseError extends Error {}
