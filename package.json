@@ -9,6 +9,10 @@
     "test": "jest"
   },
   "author": "Justin Vos",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/justinvos/podcastjs.git"
+  },
   "license": "MIT",
   "dependencies": {
     "@types/node-fetch": "^2.1.1",
