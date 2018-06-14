@@ -1,4 +1,6 @@
-export interface Podcast {
+declare module 'podcastjs'
+
+interface Podcast {
   title: string
   date: string
   description: string
@@ -8,7 +10,7 @@ export interface Podcast {
   image?: string
 }
 
-export interface Episode {
+interface Episode {
   index: number
   title: string
   date: string
@@ -17,8 +19,4 @@ export interface Episode {
   audio: string
 }
 
-export class ParseError extends Error {
-  constructor (message: string) {
-    super(message)
-  }
-}
+interface ParseError extends Error {}

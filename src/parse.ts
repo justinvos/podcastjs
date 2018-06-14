@@ -1,5 +1,5 @@
 import xmlJs from 'xml-js'
-import { Podcast, Episode, ParseError } from './interfaces'
+import { ParseError } from './classes'
 import moment from 'moment'
 
 export function parsePodcast (text: string): Podcast {
