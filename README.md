@@ -1,6 +1,7 @@
 # podcast.js
 
 podcast.js fetches and parses podcast RSS fields so you don't have to!
+
 Plus, it comes with TypeScript typings out of the box.
 
 ## Install
