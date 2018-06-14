@@ -13,3 +13,10 @@ test('full fetch test - Cortex', () => {
     expect(podcast.title).toBe('Cortex')
   })
 })
+
+test('full fetch test - Serial', () => {
+  const feedUrl = 'http://feeds.serialpodcast.org/serialpodcast'
+  return podcastJs.fetchPodcast(feedUrl).then((podcast) => {
+    expect(podcast.title).toBe('Serial')
+  })
+})

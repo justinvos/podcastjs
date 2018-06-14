@@ -12,6 +12,7 @@
   "license": "MIT",
   "dependencies": {
     "@types/node-fetch": "^2.1.1",
+    "moment": "^2.22.2",
     "node-fetch": "^2.1.2",
     "xml-js": "^1.6.4"
   },

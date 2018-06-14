@@ -16,3 +16,9 @@ export interface Episode {
   image: string
   audio: string
 }
+
+export class ParseError extends Error {
+  constructor (message: string) {
+    super(message)
+  }
+}

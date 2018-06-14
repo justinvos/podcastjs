@@ -1,5 +1,6 @@
 import xmlJs from 'xml-js'
-import { Podcast, Episode } from './interfaces'
+import { Podcast, Episode, ParseError } from './interfaces'
+const moment = require('moment')
 
 export function parsePodcast (text: string): Podcast {
   const podcastRss: any = xmlJs.xml2js(text, {compact: true});
@@ -7,7 +8,7 @@ export function parsePodcast (text: string): Podcast {
 
   const podcast: Podcast = {
     title: parsePodcastTitle(channel),
-    date: parsePodcastDate(channel),
+    date: getPodcastDate(channel),
     description: parsePodcastDescription(channel),
     episodes: podcastRss.rss.channel.item.map(parseEpisode)
   }
@@ -16,7 +17,19 @@ export function parsePodcast (text: string): Podcast {
 }
 
 export function parsePodcastTitle (channel: any): string {
-  return channel.title._text
+  if (channel.title) {
+    return channel.title._text
+  } else {
+    throw new ParseError('Could not parse Podcast.title')
+  }
+}
+
+export function getPodcastDate (channel: any): string {
+  try {
+    return moment.utc(parsePodcastDate(channel)).format()
+  } catch (error) {
+    return moment.utc().format()
+  }
 }
 
 export function parsePodcastDate (channel: any): string {
@@ -25,12 +38,16 @@ export function parsePodcastDate (channel: any): string {
   } else if (channel.lastBuildDate) {
     return channel.lastBuildDate._text
   } else {
-    throw new Error('Could not parse Podcast.date')
+    throw new ParseError('Could not parse Podcast.date')
   }
 }
 
 export function parsePodcastDescription (channel: any): string {
-  return channel.description._text
+  if (channel.description) {
+    return channel.description._text
+  } else {
+    return ''
+  }
 }
 
 export function parseEpisode (item: any, index: number): Episode {
@@ -46,21 +63,43 @@ export function parseEpisode (item: any, index: number): Episode {
 }
 
 export function parseEpisodeTitle (item: any): string {
-  return item.title._text
+  if (item.title) {
+    return item.title._text
+  } else {
+    throw new ParseError('Could not parse Episode.title')
+  }
 }
 
 export function parseEpisodeDate (item: any): string {
-  return item.pubDate._text
+  if (item.pubDate) {
+    return moment.utc(item.pubDate._text).format()
+  } else {
+    return moment.utc().format()
+  }
 }
 
 export function parseEpisodeDescription (item: any): string {
-  return item.description._cdata
+  if (item.description && item.description._cdata) {
+    return item.description._cdata
+  } else if (item.description) {
+    return item.description._text
+  } else {
+    return ''
+  }
 }
 
 export function parseEpisodeImage (item: any): string {
-  return item['itunes:image']._attributes.href
+  if (item['itunes:image'] && item['itunes:image']._attributes) {
+    return item['itunes:image']._attributes.href
+  } else {
+    return ''
+  }
 }
 
 export function parseEpisodeAudio (item: any): string {
-  return item.enclosure._attributes.url
+  if (item.enclosure && item.enclosure._attributes.url) {
+    return item.enclosure._attributes.url
+  } else {
+    throw new ParseError('Could not parse Episode.audio')
+  }
 }
