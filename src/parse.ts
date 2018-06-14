@@ -1,6 +1,6 @@
 import xmlJs from 'xml-js'
 import { Podcast, Episode, ParseError } from './interfaces'
-const moment = require('moment')
+import moment from 'moment'
 
 export function parsePodcast (text: string): Podcast {
   const podcastRss: any = xmlJs.xml2js(text, {compact: true});

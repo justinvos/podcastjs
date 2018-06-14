@@ -14,9 +14,10 @@ test('full fetch test - Cortex', () => {
   })
 })
 
-test('full fetch test - Serial', () => {
+test('full fetch test, title check and date format - Serial', () => {
   const feedUrl = 'http://feeds.serialpodcast.org/serialpodcast'
   return podcastJs.fetchPodcast(feedUrl).then((podcast) => {
-    expect(podcast.title).toBe('Serial')
+    const firstEpisode = podcast.episodes.find(episode => episode.title === 'S01 Episode 01: The Alibi')
+    expect(firstEpisode.date).toBe('2014-10-03T13:45:00Z')
   })
 })
