@@ -1,6 +1,7 @@
 # CHANGELOG
 
 ### 0.1.3
+- Release June 14, 2018
 - Correct README formatting
 - Add brief documentation to README
 - Make the Episode.image property optional
