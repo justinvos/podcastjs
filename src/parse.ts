@@ -53,6 +53,7 @@ export function parsePodcastDescription (channel: any): string {
 export function parseEpisode (item: any, index: number): Episode {
   const episode: Episode = {
     index,
+    guid: parseEpisodeGuid (item),
     title: parseEpisodeTitle(item),
     date: parseEpisodeDate(item),
     description: parseEpisodeDescription(item),
@@ -60,6 +61,14 @@ export function parseEpisode (item: any, index: number): Episode {
     audio: parseEpisodeAudio(item)
   }
   return episode
+}
+
+export function parseEpisodeGuid (item: any): string {
+  if (item.guid && item.guid._cdata) {
+    return item.guid._cdata
+  } else {
+    return ''
+  }
 }
 
 export function parseEpisodeTitle (item: any): string {

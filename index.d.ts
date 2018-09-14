@@ -13,6 +13,7 @@ interface Podcast {
 interface Episode {
   index: number
   title: string
+  guid: string
   date: string
   description: string
   audio: string
