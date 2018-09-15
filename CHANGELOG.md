@@ -1,5 +1,9 @@
 # CHANGELOG
 
+### 0.1.4
+- Release September 15, 2018
+- Add guid property to the Episode type
+
 ### 0.1.3
 - Release June 14, 2018
 - Correct README formatting
