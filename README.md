@@ -73,7 +73,7 @@ Optional Properties:
 - `description` - A description of the podcast e.g. `"It's Baltimore, 1999. Hae Min Lee, a popular high-sch..."`
 - `audio` - The URL of the audio file for this episode e.g. `"https://dts.podtrac.com/redirect.mp3/dovetail.prxu.org/serial/d7f03a15-be26-4634-8884-5fadd404ad75/serial-s01-e01.mp3"`
 - `index` - The physical ordering of this episode in the RSS feed e.g. `28`
-- `guid` - A human-defined defined global identifier e.g. `s02-e11`
+- `guid` - A human-defined global identifier e.g. `s02-e11`
 
 Optional Properties
 - `image` - The podcast's image e.g. `"https://serialpodcast.org/sites/all/modules/custom/serial/img/serial-itunes-logo.png"`
