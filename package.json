@@ -10,7 +10,7 @@
     "fetch",
     "read"
   ],
-  "main": "index.js",
+  "main": "bin/index.js",
   "scripts": {
     "build": "tsc",
     "start": "node bin/index.js",
@@ -33,5 +33,12 @@
   },
   "devDependencies": {
     "jest": "^23.1.0"
-  }
+  },
+  "files": [
+    "bin/",
+    "index.d.ts",
+    "CHANGELOG.md",
+    "LICENSE",
+    "README.md"
+  ]
 }
