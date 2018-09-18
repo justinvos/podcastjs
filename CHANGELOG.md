@@ -1,5 +1,9 @@
 # CHANGELOG
 
+### 0.1.5
+- Release September 18, 2018
+- Fix broken package build
+
 ### 0.1.4
 - Release September 15, 2018
 - Add guid property to the Episode type
