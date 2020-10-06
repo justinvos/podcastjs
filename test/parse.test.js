@@ -1,23 +1,20 @@
 const podcastJs = require('../bin/index')
 
-test('full fetch test - Hello Internet', () => {
+test('full fetch test - Hello Internet', async () => {
   const feedUrl = 'http://www.hellointernet.fm/podcast?format=rss'
-  return podcastJs.fetchPodcast(feedUrl).then((podcast) => {
-    expect(podcast.title).toBe('Hello Internet')
-  })
+  const podcast = await podcastJs.fetchPodcast(feedUrl)
+  expect(podcast.title).toBe('Hello Internet')
 })
 
-test('full fetch test - Cortex', () => {
+test('full fetch test - Cortex', async () => {
   const feedUrl = 'https://www.relay.fm/cortex/feed'
-  return podcastJs.fetchPodcast(feedUrl).then((podcast) => {
-    expect(podcast.title).toBe('Cortex')
-  })
+  const podcast = await podcastJs.fetchPodcast(feedUrl)
+  expect(podcast.title).toBe('Cortex')
 })
 
-test('full fetch test, title check and date format - Serial', () => {
+test('full fetch test, title check and date format - Serial', async () => {
   const feedUrl = 'http://feeds.serialpodcast.org/serialpodcast'
-  return podcastJs.fetchPodcast(feedUrl).then((podcast) => {
-    const firstEpisode = podcast.episodes.find(episode => episode.title === 'S01 Episode 01: The Alibi')
-    expect(firstEpisode.date).toBe('2014-10-03T13:45:00Z')
-  })
+  const podcast = await podcastJs.fetchPodcast(feedUrl)
+  const firstEpisode = podcast.episodes.find(episode => episode.title === 'S01 Episode 01: The Alibi')
+  expect(firstEpisode.date).toBe('2014-10-03T13:45:00Z')
 })
