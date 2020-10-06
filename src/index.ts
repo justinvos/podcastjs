@@ -1,5 +1,4 @@
-import fetch from 'node-fetch'
-//import { Podcast } from './interfaces'
+import fetch from 'cross-fetch'
 import { parsePodcast } from './parse'
 
 export function fetchPodcast (url: string): Promise<Podcast> {
