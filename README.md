@@ -20,13 +20,24 @@ npm install podcastjs
 
 ### Plain JavaScript:
 ```js
-const podcastJs = require('podcastjs')
+const { fetchPodcast, parsePodcast } = require('podcastjs');
 
-const serialRssUrl = 'http://feeds.serialpodcast.org/serialpodcast'
+const serialRssUrl = 'http://feeds.serialpodcast.org/serialpodcast';
 
-podcastJs.fetchPodcast(serialRssUrl).then((podcast) => {
-  console.log(podcast.title)
-})
+fetchPodcast(serialRssUrl)
+  .then((podcast) => {
+    console.log(podcast.title)
+  });
+
+
+// OR directly parse it
+
+const podcastXML = '...'; // Podcast RSS XML body's text content
+
+parsePodcast(podcastXML)
+  .then((podcast) => {
+    console.log(podcast.title)
+  });
 ```
 
 ### TypeScript:
@@ -36,9 +47,21 @@ import { fetchPodcast } from 'podcastjs'
 const serialRssUrl = 'http://feeds.serialpodcast.org/serialpodcast';
 
 const podcast = await fetchPodcast(serialRssUrl);
+
+
+// OR directly parse it
+
+const podcastXML = '...'; // Podcast RSS XML body's text content
+
+const podcast = parsePodcast(podcastXML);
 ```
 
 ## Documentation
+
+### parsePodcast
+Directly parse an XML string into formatted and structured JavaScript objects.
+
+`parsePodcast(xmlText)`
 
 ### fetchPodcast
 You can fetch and parse an RSS feed by calling the fetchPodcast function.

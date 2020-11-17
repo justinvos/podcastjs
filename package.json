@@ -1,6 +1,6 @@
 {
   "name": "podcastjs",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "podcast.js fetches and parses podcast RSS fields so you don't have to!",
   "keywords": [
     "podcast",
