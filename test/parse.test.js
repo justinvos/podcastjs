@@ -1,5 +1,5 @@
 const fs = require('fs/promises')
-const podcastJs = require('../bin/index')
+const podcastJs = require('../dist/index')
 
 test.concurrent('full fetch test - Hello Internet', async () => {
   const feed = await getFixture('hello_internet_rss.xml')
@@ -18,7 +18,7 @@ test.concurrent('full fetch test, title check and date format - Serial', async (
   const feed = await getFixture('serial_rss.xml')
   const podcast = await podcastJs.parsePodcast(feed)
   const firstEpisode = podcast.episodes.find(episode => episode.title === 'S01 Episode 01: The Alibi')
-  expect(firstEpisode.date).toBe('2014-10-03T13:45:00Z')
+  expect(firstEpisode.date.toISOString()).toBe('2014-10-03T13:45:00.000Z')
 })
 
 async function getFixture(name) {

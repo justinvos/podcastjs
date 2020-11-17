@@ -1,6 +1,5 @@
+import { parse } from 'date-fns'
 import xmlJs from 'xml-js'
-import { ParseError } from './classes'
-import moment from 'moment'
 
 export function parsePodcast (text: string): Podcast {
   const podcastRss: any = xmlJs.xml2js(text, {compact: true});
@@ -17,37 +16,39 @@ export function parsePodcast (text: string): Podcast {
   return podcast
 }
 
-export function parsePodcastTitle (channel: any): string {
+export function parsePodcastTitle (channel: any): string | null {
   if (channel.title) {
     return channel.title._text
   } else {
-    throw new ParseError('Could not parse Podcast.title')
+    return null
   }
 }
 
-export function getPodcastDate (channel: any): string {
-  try {
-    return moment.utc(parsePodcastDate(channel)).format()
-  } catch (error) {
-    return moment.utc().format()
+export function getPodcastDate (channel: any): Date | null {
+  const datestring = extractPodcastDatestring(channel)
+
+  if (datestring) {
+    return parseDatestring(datestring)
   }
+
+  return null
 }
 
-export function parsePodcastDate (channel: any): string {
+export function extractPodcastDatestring (channel: any): string | null {
   if (channel.pubDate) {
     return channel.pubDate._text
   } else if (channel.lastBuildDate) {
     return channel.lastBuildDate._text
-  } else {
-    throw new ParseError('Could not parse Podcast.date')
   }
+
+  return null
 }
 
-export function parsePodcastDescription (channel: any): string {
+export function parsePodcastDescription (channel: any): string | null {
   if (channel.description) {
     return channel.description._text
   } else {
-    return ''
+    return null
   }
 }
 
@@ -64,52 +65,57 @@ export function parseEpisode (item: any, index: number): Episode {
   return episode
 }
 
-export function parseEpisodeGuid (item: any): string {
+export function parseEpisodeGuid (item: any): string | null {
   if (item.guid && item.guid._cdata) {
     return item.guid._cdata
   } else {
-    return ''
+    return null
   }
 }
 
-export function parseEpisodeTitle (item: any): string {
+export function parseEpisodeTitle (item: any): string | null {
   if (item.title) {
     return item.title._text
-  } else {
-    throw new ParseError('Could not parse Episode.title')
   }
+  
+  return null
 }
 
-export function parseEpisodeDate (item: any): string {
+export function parseEpisodeDate (item: any): Date | null {
   if (item.pubDate) {
-    return moment.utc(item.pubDate._text).format()
+    return parseDatestring(item.pubDate._text)
   } else {
-    return moment.utc().format()
+    return null
   }
 }
 
-export function parseEpisodeDescription (item: any): string {
+export function parseEpisodeDescription (item: any): string | null {
   if (item.description && item.description._cdata) {
     return item.description._cdata
   } else if (item.description) {
     return item.description._text
   } else {
-    return ''
+    return null
   }
 }
 
-export function parseImage (item: any): string {
+export function parseImage (item: any): string | null {
   if (item['itunes:image'] && item['itunes:image']._attributes) {
     return item['itunes:image']._attributes.href
   } else {
-    return ''
+    return null
   }
 }
 
-export function parseEpisodeAudio (item: any): string {
+export function parseEpisodeAudio (item: any): string | null {
   if (item.enclosure && item.enclosure._attributes.url) {
     return item.enclosure._attributes.url
-  } else {
-    throw new ParseError('Could not parse Episode.audio')
   }
+
+  return null
+}
+
+function parseDatestring(datestring: string): Date {
+  const cleanedDatestring = datestring.slice(datestring.indexOf(',') + 2).replace(/GMT/, 'Z')
+  return parse(cleanedDatestring, 'dd MMM y kk:mm:ss XX', new Date())
 }

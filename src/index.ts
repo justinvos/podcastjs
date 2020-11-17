@@ -1,12 +1,2 @@
-import fetch from 'cross-fetch'
-import { parsePodcast } from './parse'
-
-export { parsePodcast }
-
-export function fetchPodcast (url: string): Promise<Podcast> {
-  return fetch(url)
-    .then((res: any) => res.text())
-    .then(parsePodcast)
-}
-
-export default fetchPodcast
+export { fetchPodcast } from './fetchPodcast'
+export { parsePodcast } from './parse'

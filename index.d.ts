@@ -1,24 +1,20 @@
 declare module 'podcastjs'
 
 interface Podcast {
-  title: string
-  date: string
-  description: string
+  title: string | null
+  date: Date | null
+  description: string | null
   episodes: Episode[]
-
-  url?: string
-  image?: string
+  image: string | null
 }
 
 interface Episode {
   index: number
-  title: string
-  guid: string
-  date: string
-  description: string
-  audio: string
+  title: string | null
+  guid: string | null
+  date: Date | null
+  description: string | null
+  audio: string | null
 
-  image?: string
+  image: string | null
 }
-
-interface ParseError extends Error {}

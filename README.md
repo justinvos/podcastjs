@@ -31,13 +31,11 @@ podcastJs.fetchPodcast(serialRssUrl).then((podcast) => {
 
 ### TypeScript:
 ```ts
-import fetchPodcast, { Podcast } from 'podcastjs'
+import { fetchPodcast } from 'podcastjs'
 
-const serialRssUrl = 'http://feeds.serialpodcast.org/serialpodcast'
+const serialRssUrl = 'http://feeds.serialpodcast.org/serialpodcast';
 
-fetchPodcast(serialRssUrl).then((podcast: Podcast) => {
-  console.log(podcast.title)
-})
+const podcast = await fetchPodcast(serialRssUrl);
 ```
 
 ## Documentation
