@@ -10,7 +10,8 @@ export function parsePodcast (text: string): Podcast {
     title: parsePodcastTitle(channel),
     date: getPodcastDate(channel),
     description: parsePodcastDescription(channel),
-    episodes: podcastRss.rss.channel.item.map(parseEpisode)
+    episodes: podcastRss.rss.channel.item.map(parseEpisode),
+    image: parseImage(channel)
   }
 
   return podcast
@@ -57,7 +58,7 @@ export function parseEpisode (item: any, index: number): Episode {
     title: parseEpisodeTitle(item),
     date: parseEpisodeDate(item),
     description: parseEpisodeDescription(item),
-    image: parseEpisodeImage(item),
+    image: parseImage(item),
     audio: parseEpisodeAudio(item)
   }
   return episode
@@ -97,7 +98,7 @@ export function parseEpisodeDescription (item: any): string {
   }
 }
 
-export function parseEpisodeImage (item: any): string {
+export function parseImage (item: any): string {
   if (item['itunes:image'] && item['itunes:image']._attributes) {
     return item['itunes:image']._attributes.href
   } else {
